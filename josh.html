@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>my baby juls</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Consolas, monospace;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+}
+
+/* floating shapes */
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.25;
+    animation: float 10s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh); }
+    100% { transform: translateY(-10vh); }
+}
+
+/* BOX */
+.box {
+    border: 2px solid #94fd09;
+    padding: 20px;
+    width: 450px;
+    max-height: 85vh;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    overflow-y: auto;
+    background: rgba(238, 234, 12, 0.945);
+    position: relative;
+    z-index: 2;
+    border-radius: 10px;
+}
+
+/* TEXT */
+#text {
+    font-size: 16px;
+    color: #333;
+}
+
+/* BUTTON */
+button {
+    margin-top: 15px;
+    padding: 15px 25px;
+    background: #f3ef11;
+    color: #333;
+    border: 2px solid #86f705;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #86be45;
+}
+
+/* FINAL */
+#final {
+    display: none;
+    margin-top: 20px;
+    color: #333;
+}
+
+/* 📸 4 PICTURE GRID (PORTRAIT) */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 220px;   /* portrait size */
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #9af508;
+}
+
+/* HEART */
+.heart {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #ffcc80;
+    transform: rotate(-45deg);
+    animation: floatUp 6s linear infinite;
+}
+
+.heart:before,
+.heart:after {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #ffcc80;
+    border-radius: 50%;
+}
+
+.heart:before { top: -7px; }
+.heart:after { left: 7px; }
+
+@keyframes floatUp {
+    0% { transform: translateY(0) rotate(-45deg); opacity: 1; }
+    100% { transform: translateY(-700px) rotate(-45deg); opacity: 0; }
+}
+
+/* FLOWER */
+.flower {
+    position: absolute;
+    font-size: 16px;
+    animation: float 8s linear infinite;
+}
+</style>
+</head>
+
+<body>
+
+<script>
+function createShape(){
+    const s = document.createElement("div");
+    s.classList.add("shape");
+
+    const size = Math.random()*60 + 20;
+    s.style.width = size + "px";
+    s.style.height = size + "px";
+
+    s.style.left = Math.random()*100 + "vw";
+    s.style.background = Math.random() > 0.5 ? "#ffe082" : "#a5d6a7";
+
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),10000);
+}
+setInterval(createShape, 800);
+</script>
+
+<div class="box">
+
+    <div id="text">⚠ ERROR: Heart not detected</div>
+
+    <button onclick="next()">REPAIR 💛</button>
+
+    <div id="final">
+
+        <p>
+Hi baby. Gusto ko lang sabihin na mahal na mahal kita at proud na proud ako sa’yo every day. I know hindi araw-araw madali ang buhay. May mga moments na pagod ka, tahimik ka, or gusto mo na lang mapag-isa. Pero kahit ganun, andito ka pa rin, lumalaban ka pa rin in your own way. And that alone makes me admire you even more. You don’t need to be perfect for me to be proud of you. You already are enough just the way you are. Ang sarap lang isipin na ikaw yung taong nandyan sa buhay ko. Yung presence mo, yung paraan mo magsalita, yung simpleng ikaw sobrang laki ng value para sa’kin kahit hindi mo naman kailangan gawin yung mga “big things” para mapansin kita. I just want you to know na andito lang ako palagi. Hindi nagbabago yung presence ko para sayo kahit anong mangyari sa araw o sa buhay. Kung may times na tahimik ka, okay lang yun. Kung may times na gusto mo lang mapag-isa, naiintindihan ko rin yun. Pero gusto ko rin na alam mo na hindi mo kailangan mag-isa. You matter to me in ways na hindi ko rin minsan ma-explain nang maayos. Mahal na Mahal kita, at proud ako sayo. I’m always here for you. If you have problems, you can open up to me anytime. I will listen, I will understand, and I will stay. Please take care of yourself always. Drink water, eat well, and don’t forget to rest. Your health and peace of mind are important. I love you always and I’m proud of you every single day.
+        </p>
+
+        <!-- 📸 4 PICTURES -->
+        <div class="gallery">
+            <img src="pic1.jpg">
+            <img src="pic2.jpg">
+            <img src="pic3.jpg">
+            <img src="pic4.jpg">
+        </div>
+
+    </div>
+</div>
+
+<audio id="music" loop>
+    <source src="daylight.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const lines = [
+    "✔ Scanning heart...",
+    "✔ Love detected 💛",
+    "✔ Loading feelings 🌿",
+    "✔ Almost ready..."
+];
+
+let i = 0;
+
+function createHeart(){
+    const h = document.createElement("div");
+    h.classList.add("heart");
+    h.style.left = Math.random()*window.innerWidth + "px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+}
+
+function createFlower(){
+    const f = document.createElement("div");
+    f.classList.add("flower");
+    f.innerHTML = Math.random()>0.5 ? "🌸" : "🌼";
+    f.style.left = Math.random()*window.innerWidth + "px";
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),8000);
+}
+
+function next(){
+    if(i < lines.length){
+        document.getElementById("text").innerHTML = lines[i];
+        i++;
+    } else {
+        document.getElementById("text").style.display = "none";
+        document.querySelector("button").style.display = "none";
+        document.getElementById("final").style.display = "block";
+
+        let music = document.getElementById("music");
+        music.play().catch(()=>{
+            document.body.addEventListener("click", ()=>music.play(), {once:true});
+        });
+
+        setInterval(createHeart, 400);
+        setInterval(createFlower, 600);
+    }
+}
+</script>
+
+</body>
+</html>
